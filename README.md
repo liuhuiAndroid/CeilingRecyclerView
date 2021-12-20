@@ -1,2 +1,2 @@
 # CeilingRecyclerView
-RecyclerView实现吸顶效果
+使用 ItemDecoration 实现 RecyclerView 吸顶效果
