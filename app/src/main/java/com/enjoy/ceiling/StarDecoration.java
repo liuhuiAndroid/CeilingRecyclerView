@@ -13,23 +13,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class StarDecoration extends RecyclerView.ItemDecoration {
 
-    private int groupHeaderHeight;
-
-    private Paint headPaint;
-    private Paint textPaint;
-
-    private Rect textRect;
+    private final int groupHeaderHeight;
+    private final Paint headPaint;
+    private final Paint textPaint;
+    private final Rect textRect;
 
     public StarDecoration(Context context) {
         groupHeaderHeight = dp2px(context, 100);
-
         headPaint = new Paint();
         headPaint.setColor(Color.RED);
-
         textPaint = new Paint();
         textPaint.setTextSize(50);
         textPaint.setColor(Color.WHITE);
-
         textRect = new Rect();
     }
 
@@ -48,13 +43,13 @@ public class StarDecoration extends RecyclerView.ItemDecoration {
                 // 获取View的布局位置
                 int position = parent.getChildLayoutPosition(view);
                 // 是否是头部
-                boolean isGroupHeader = adapter.isGourpHeader(position);
+                boolean isGroupHeader = adapter.isGroupHeader(position);
                 if (isGroupHeader && view.getTop() - groupHeaderHeight - parent.getPaddingTop() >= 0) {
                     c.drawRect(left, view.getTop() - groupHeaderHeight, right, view.getTop(), headPaint);
                     String groupName = adapter.getGroupName(position);
                     textPaint.getTextBounds(groupName, 0, groupName.length(), textRect);
                     c.drawText(groupName, left + 20, view.getTop() -
-                            groupHeaderHeight / 2 + textRect.height() / 2, textPaint);
+                            groupHeaderHeight / 2f + textRect.height() / 2f, textPaint);
                 } else if (view.getTop() - groupHeaderHeight - parent.getPaddingTop() >= 0) {
                     // 分割线
                     c.drawRect(left, view.getTop() - 4, right, view.getTop(), headPaint);
@@ -76,33 +71,30 @@ public class StarDecoration extends RecyclerView.ItemDecoration {
             int right = parent.getWidth() - parent.getPaddingRight();
             int top = parent.getPaddingTop();
             // 当第二个是组的头部的时候
-            boolean isGroupHeader = adapter.isGourpHeader(position + 1);
+            boolean isGroupHeader = adapter.isGroupHeader(position + 1);
             if (isGroupHeader) {
                 int bottom = Math.min(groupHeaderHeight, itemView.getBottom() - parent.getPaddingTop());
-
                 c.drawRect(left, top, right, top + bottom, headPaint);
                 String groupName = adapter.getGroupName(position);
                 textPaint.getTextBounds(groupName, 0, groupName.length(), textRect);
                 c.drawText(groupName, left + 20, top + bottom
-                        - groupHeaderHeight / 2 + textRect.height() / 2, textPaint);
+                        - groupHeaderHeight / 2f + textRect.height() / 2f, textPaint);
             } else {
                 c.drawRect(left, top, right, top + groupHeaderHeight, headPaint);
                 String groupName = adapter.getGroupName(position);
                 textPaint.getTextBounds(groupName, 0, groupName.length(), textRect);
-                c.drawText(groupName, left + 20, top + groupHeaderHeight / 2 + textRect.height() / 2, textPaint);
+                c.drawText(groupName, left + 20, top + groupHeaderHeight / 2f + textRect.height() / 2f, textPaint);
             }
-
         }
     }
 
     @Override
     public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
-
         if (parent.getAdapter() instanceof StarAdapter) {
             StarAdapter adapter = (StarAdapter) parent.getAdapter();
             int position = parent.getChildLayoutPosition(view);
-            boolean isGroupHeader = adapter.isGourpHeader(position);
+            boolean isGroupHeader = adapter.isGroupHeader(position);
             // 怎么判断 itemView是头部
             if (isGroupHeader) {
                 // 如果是头部，预留更大的地方

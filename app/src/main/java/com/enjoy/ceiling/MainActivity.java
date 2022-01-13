@@ -28,11 +28,11 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
         starList = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 20; j++) {
+            for (int j = 0; j < 12; j++) {
                 if (i % 2 == 0) {
-                    starList.add(new Star("何炅" + j, "快乐家族" + i));
+                    starList.add(new Star("中原" + j, "中原找房" + i));
                 } else {
-                    starList.add(new Star("汪涵" + j, "天天兄弟" + i));
+                    starList.add(new Star("贝壳" + j, "贝壳找房" + i));
                 }
             }
         }

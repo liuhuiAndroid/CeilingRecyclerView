@@ -6,8 +6,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
-        android:paddingTop="150dp" />
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>

@@ -23,11 +23,8 @@ public class StarAdapter extends RecyclerView.Adapter<StarAdapter.StarViewHolder
 
     /**
      * 是否是组的第一个item
-     *
-     * @param position
-     * @return
      */
-    public boolean isGourpHeader(int position) {
+    public boolean isGroupHeader(int position) {
         if (position == 0) {
             return true;
         } else {
@@ -42,7 +39,7 @@ public class StarAdapter extends RecyclerView.Adapter<StarAdapter.StarViewHolder
     }
 
     public String getGroupName(int position) {
-        return starList.get(position).getGroundName();
+        return starList.get(position).getGroupName();
     }
 
     @NonNull

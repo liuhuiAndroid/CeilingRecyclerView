@@ -3,26 +3,18 @@ package com.enjoy.ceiling;
 public class Star {
 
     private String name;
-    private String groundName;
+    private String groupName;
 
     public Star(String name, String groundName) {
         this.name = name;
-        this.groundName = groundName;
+        this.groupName = groundName;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getGroundName() {
-        return groundName;
-    }
-
-    public void setGroundName(String groundName) {
-        this.groundName = groundName;
+    public String getGroupName() {
+        return groupName;
     }
 }
