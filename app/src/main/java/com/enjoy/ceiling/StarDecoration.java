@@ -22,12 +22,17 @@ public class StarDecoration extends RecyclerView.ItemDecoration {
         groupHeaderHeight = dp2px(context, 100);
         headPaint = new Paint();
         headPaint.setColor(Color.RED);
+        headPaint.setAntiAlias(true);
         textPaint = new Paint();
         textPaint.setTextSize(50);
         textPaint.setColor(Color.WHITE);
+        textPaint.setAntiAlias(true);
         textRect = new Rect();
     }
 
+    /**
+     * 一般用于绘制可以活动的部分
+     */
     @Override
     public void onDraw(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         super.onDraw(c, parent, state);
@@ -45,7 +50,9 @@ public class StarDecoration extends RecyclerView.ItemDecoration {
                 // 是否是头部
                 boolean isGroupHeader = adapter.isGroupHeader(position);
                 if (isGroupHeader && view.getTop() - groupHeaderHeight - parent.getPaddingTop() >= 0) {
+                    // 顶部背景
                     c.drawRect(left, view.getTop() - groupHeaderHeight, right, view.getTop(), headPaint);
+                    // 顶部文字
                     String groupName = adapter.getGroupName(position);
                     textPaint.getTextBounds(groupName, 0, groupName.length(), textRect);
                     c.drawText(groupName, left + 20, view.getTop() -
@@ -58,6 +65,9 @@ public class StarDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
+    /**
+     * 可覆盖
+     */
     @Override
     public void onDrawOver(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         super.onDrawOver(c, parent, state);
@@ -77,13 +87,14 @@ public class StarDecoration extends RecyclerView.ItemDecoration {
                 c.drawRect(left, top, right, top + bottom, headPaint);
                 String groupName = adapter.getGroupName(position);
                 textPaint.getTextBounds(groupName, 0, groupName.length(), textRect);
-                c.drawText(groupName, left + 20, top + bottom
-                        - groupHeaderHeight / 2f + textRect.height() / 2f, textPaint);
+                c.drawText(groupName, left + 20,
+                        top + bottom - groupHeaderHeight / 2f + textRect.height() / 2f, textPaint);
             } else {
                 c.drawRect(left, top, right, top + groupHeaderHeight, headPaint);
                 String groupName = adapter.getGroupName(position);
                 textPaint.getTextBounds(groupName, 0, groupName.length(), textRect);
-                c.drawText(groupName, left + 20, top + groupHeaderHeight / 2f + textRect.height() / 2f, textPaint);
+                c.drawText(groupName, left + 20,
+                        top + groupHeaderHeight / 2f + textRect.height() / 2f, textPaint);
             }
         }
     }
@@ -100,7 +111,7 @@ public class StarDecoration extends RecyclerView.ItemDecoration {
                 // 如果是头部，预留更大的地方
                 outRect.set(0, groupHeaderHeight, 0, 0);
             } else {
-                // 1像素
+                // 设置顶部普通分割线1像素
                 outRect.set(0, 4, 0, 0);
             }
         }

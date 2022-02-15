@@ -13,8 +13,8 @@ import java.util.List;
 
 public class StarAdapter extends RecyclerView.Adapter<StarAdapter.StarViewHolder> {
 
-    private Context context;
-    private List<Star> starList;
+    private final Context context;
+    private final List<Star> starList;
 
     public StarAdapter(Context context, List<Star> starList) {
         this.context = context;
@@ -28,13 +28,9 @@ public class StarAdapter extends RecyclerView.Adapter<StarAdapter.StarViewHolder
         if (position == 0) {
             return true;
         } else {
-            String currentGroupName = getGroupName(position);
+            String curGroupName = getGroupName(position);
             String preGroupName = getGroupName(position - 1);
-            if (preGroupName.equals(currentGroupName)) {
-                return false;
-            } else {
-                return true;
-            }
+            return !preGroupName.equals(curGroupName);
         }
     }
 
@@ -60,7 +56,7 @@ public class StarAdapter extends RecyclerView.Adapter<StarAdapter.StarViewHolder
     }
 
     public class StarViewHolder extends RecyclerView.ViewHolder {
-        private TextView tv;
+        private final TextView tv;
 
         public StarViewHolder(@NonNull View itemView) {
             super(itemView);
